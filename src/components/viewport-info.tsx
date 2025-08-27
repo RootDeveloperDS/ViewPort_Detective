@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useViewport } from '@/hooks/use-viewport';
@@ -11,6 +10,7 @@ import { Clipboard, Smartphone, Ratio, Tablet, Monitor, Grid2x2, Check } from 'l
 import React, { useState, useCallback, useEffect } from 'react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { PixelGrid } from './pixel-grid';
+import { ClickGrid } from '@/components/click-grid';
 
 const BREAKPOINTS: Record<ReturnType<typeof useViewport>['breakpoint'], string> = {
   'xs': '< 640px',
@@ -21,7 +21,6 @@ const BREAKPOINTS: Record<ReturnType<typeof useViewport>['breakpoint'], string> 
   '2xl': '≥ 1536px'
 };
 const BREAKPOINTS_ORDER = Object.keys(BREAKPOINTS) as (keyof typeof BREAKPOINTS)[];
-
 
 const AnimatedValue = ({ value }: { value: string | number | undefined }) => {
   if (value === undefined) {
@@ -74,7 +73,8 @@ export function ViewportInfo() {
   return (
     <TooltipProvider>
       <PixelGrid show={showGrid} dpr={viewport.dpr!} />
-      <div className="w-full max-w-7xl">
+      {showGrid && <ClickGrid onExit={() => setShowGrid(false)} />}
+      <div className="w-full max-w-7xl relative">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-4 md:gap-8 mb-8 text-center">
           <div className="font-black text-6xl sm:text-7xl md:text-8xl tracking-tighter flex items-center transition-all duration-300">
               <AnimatedValue value={viewport.width} />
@@ -82,13 +82,13 @@ export function ViewportInfo() {
               <AnimatedValue value={viewport.height} />
           </div>
           <div className="flex flex-col gap-2">
-            <Button onClick={handleCopy} size="lg" className="shrink-0 text-base">
+            <Button onClick={handleCopy} size="lg" className="shrink-0 text-base" data-ignore-grid>
               <Clipboard className="mr-2 h-5 w-5" />
               Copy Details
             </Button>
              <Tooltip>
                 <TooltipTrigger asChild>
-                    <Button onClick={() => setShowGrid(!showGrid)} variant={showGrid ? "default" : "outline"} size="lg" className="shrink-0 text-base">
+                    <Button onClick={() => setShowGrid(!showGrid)} variant={showGrid ? "default" : "outline"} size="lg" className="shrink-0 text-base" data-ignore-grid>
                       <Grid2x2 className="mr-2 h-5 w-5" />
                       Grid
                     </Button>
