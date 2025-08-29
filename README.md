@@ -11,7 +11,7 @@
 [
 ]
 
-[🚀 Live Demo](https://viewport-detective.vercel.app) -  [📖 Documentation](#features) -  [🐛 Report Bug](https://github.com/RootDeveloperDS/ViewPort_Detective/issues) -  [✨ Request Feature](https://github.com/RootDeveloperDS/ViewPort_Detective/issues)
+[🚀 Live Demo](https://viewportdetective.vercel.app) -  [📖 Documentation](#features) -  [🐛 Report Bug](https://github.com/RootDeveloperDS/ViewPort_Detective/issues) -  [✨ Request Feature](https://github.com/RootDeveloperDS/ViewPort_Detective/issues)
 
 </div>
 
